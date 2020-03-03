@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "easy-to-eat-lib": [
+        "dist/easy-to-eat-lib"
+      ],
+      "easy-to-eat-lib/*": [
+        "dist/easy-to-eat-lib/*"
+      ]
+    }
   }
 }
