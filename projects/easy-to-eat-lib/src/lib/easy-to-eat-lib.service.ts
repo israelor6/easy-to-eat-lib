@@ -4,13 +4,13 @@ import {Inject, Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class EasyToEatLibService {
-  env = 'Dev';
+  baseUrl: string;
 
   constructor(@Inject('config') private config: any) {
-    this.env = config.env;
+    this.baseUrl = config.baseUrl;
   }
 
   getBaseUrl() {
-    return this.env === 'Dev' ? 'https://esaytoeat-server.herokuapp.com' : 'https://esaytoeat-server.herokuapp.com';
+    return this.baseUrl;
   }
 }

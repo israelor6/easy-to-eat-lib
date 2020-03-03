@@ -4,10 +4,10 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Order} from '../models/order';
 import {Status} from '../enums/status.enum';
 import {AuthService} from './auth.service';
-import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {EasyToEatLibService} from '../easy-to-eat-lib.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,11 @@ export class UserService {
   public currUser: User;
   userEvent = new BehaviorSubject<User>(null);
   constructor(private auth: AuthService,
+              private mainService: EasyToEatLibService,
               private router: Router,
               private http: HttpClient) {
     if (this.auth.getToken()) {
-      this.http.get(`${environment.baseUrl}/user/currentUser`).subscribe((user: User) => {
+      this.http.get(`${this.mainService.baseUrl}/user/currentUser`).subscribe((user: User) => {
         this.setCurrUser(user);
       });
     }
@@ -42,15 +43,15 @@ export class UserService {
   }
 
   getUserOrders(userId: string): Observable<any> {
-    return this.http.get(`${environment.baseUrl}/orders/ordersByUserId?userId=${userId}`);
+    return this.http.get(`${this.mainService.baseUrl}/orders/ordersByUserId?userId=${userId}`);
   }
 
   login(user: {email: string, password: string}): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/user/login`, user);
+    return this.http.post(`${this.mainService.baseUrl}/user/login`, user);
   }
 
   register(user: User): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/user/register`, user);
+    return this.http.post(`${this.mainService.baseUrl}/user/register`, user);
   }
 
   searchByName(term: string) {
@@ -59,12 +60,12 @@ export class UserService {
     }
 
     return this.http
-      .get(`${environment.baseUrl}/user/getUserByStartLetter?letters=${term}`).pipe(
+      .get(`${this.mainService.baseUrl}/user/getUserByStartLetter?letters=${term}`).pipe(
         map((response) => response)
       );
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get(`${environment.baseUrl}/user/getAllUsers`);
+    return this.http.get(`${this.mainService.baseUrl}/user/getAllUsers`);
   }
 }

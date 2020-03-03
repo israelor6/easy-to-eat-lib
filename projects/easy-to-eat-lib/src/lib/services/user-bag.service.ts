@@ -4,9 +4,9 @@ import {MenuItem} from '../models/menu-item';
 import {CommonService} from './common.service';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {Delivery, Order} from '../models/order';
 import {Restaurant} from '../models/restaurant';
+import {EasyToEatLibService} from '../easy-to-eat-lib.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class UserBagService {
   order: Order;
   restaurant: Restaurant;
   constructor(public commonService: CommonService,
+              private mainService: EasyToEatLibService,
               public http: HttpClient) {
   }
 
@@ -45,7 +46,7 @@ export class UserBagService {
   }
 
   addOrder(item: Order): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/orders`, item);
+    return this.http.post(`${this.mainService.baseUrl}/orders`, item);
   }
 
   setBag(bag: Order) {
