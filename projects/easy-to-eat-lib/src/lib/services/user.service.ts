@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {Order} from '../models/order';
-import {Status} from '../enums/status.enum';
 import {AuthService} from './auth.service';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';

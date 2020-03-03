@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Status} from '../enums/status.enum';
 import {EasyToEatLibService} from '../easy-to-eat-lib.service';
+import {Status} from '../models/order';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,4 @@
 import {MenuItem} from './menu-item';
-import {Status} from '../enums/status.enum';
 import {Restaurant} from './restaurant';
 import {PaymentStatus, UserBag} from './user-bag';
 import {User} from './user';
@@ -22,4 +21,11 @@ export interface Order {
 export enum Delivery {
   pickUp,
   delivery
+}
+
+export enum Status {
+  ready = 'ההזמנה מוכנה',
+  view = 'הזמנה נצפתה',
+  new = 'התקבלה ההזמנה',
+  delivered = 'ההזמנה בדרך'
 }
